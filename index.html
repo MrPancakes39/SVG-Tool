@@ -6,23 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>SVG Tool 3.0</title>
+    <title>SVG Tool 4.0</title>
     <link rel="stylesheet" href="main.css">
-    <link rel="icon" href="icons/simplified_icon.ico">
+    <link rel="icon" href="images/simplified_icon.ico">
 
     <script src="libraries/p5.min.js"></script>
-    <script src="libraries/addons/p5.dom.min.js"></script>
+    <script src="libraries/jquery-3.4.1.min.js"></script>
 
     <script src="libraries/nerdamer.core.js"></script>
-    <script src="libraries/addons/Algebra.js"></script>
+    <script src="libraries/Algebra.js"></script>
+    <script src="libraries/Calculus.js"></script>
+    <script src="libraries/Solve.js"></script>
 
     <script src="parts/tools.js"></script>
-    <script src="parts/simplifier.js"></script>
+    <script src="parts/canvas.js"></script>
+    <script src="parts/computation.js"></script>
     <script src="parts/options.js"></script>
-    <script src="parts/properties.js"></script>
+    <script src="parts/object.js"></script>
 
-    <script src="point.js"></script>
     <script src="sketch.js"></script>
+    <!-- <script src="test.js"></script> -->
 </head>
 
 <body>
@@ -80,20 +83,91 @@
             </div>
         </div>
         <div class="clr" id="advanced">
-            <h2><ins>Pick Custom Points:</ins></h2>
-            <button id="loadPathButton">Load Path</button>
-            <button id="transformButton">Transform</button>
-            <button id="showPointsButton">Show Points</button>
-            <button id="submitCustomButton">Submit Selected Points</button>
+            <div id="left">
+                <h2><ins>Pick Custom Points:</ins></h2>
+                <button id="loadPathButton">Load Path</button>
+                <button id="transformButton">Transform</button>
+                <button id="showPointsButton">Show Points</button>
+                <button id="submitCustomButton">Submit Selected Points</button>
 
-            <h3 id="customInput"><ins>Custom Input:</ins></h3>
-            <label id="selPLabel_alt" for="selPath_alt">Select a Path:</label>
-            <input id="selPath_alt" type="text">
-            <button id="sendButton_alt">Send</button>
+                <h3 id="customInput"><ins>Custom Input:</ins></h3>
+                <label id="selPLabel_alt" for="selPath_alt">Select a Path:</label>
+                <input id="selPath_alt" type="text">
+                <button id="sendButton_alt">Send</button>
 
-            <h2 id="output_header"><ins>Output:</ins></h2>
-            <textarea id="output_field" type="text" readonly></textarea>
-            <button id="clearButton">Clear Output</button>
+                <h2 id="output_header"><ins>Output:</ins></h2>
+                <textarea id="output_field" type="text" readonly></textarea>
+                <button id="clearButton">Clear Output</button>
+            </div>
+            <div id="right">
+                <h2><ins>Cubic Parametric Equation:</ins></h2>
+                <p>X = a*t^3 + b*t^2 + c*t + d</p>
+                <p>Y = p*t^3 + q*t^2 + r*t + s</p>
+                <hr>
+                <div>
+                    <label class="lValText" for="aVal">a =</label>
+                    <input class="coeffVal" id="aVal" type="text">
+                    <label class="rValText" for="pVal">p =</label>
+                    <input class="coeffVal" id="pVal" type="text">
+                </div>
+                <div>
+                    <label class="lValText" for="bVal">b =</label>
+                    <input class="coeffVal" id="bVal" type="text">
+                    <label class="rValText" for="qVal">q =</label>
+                    <input class="coeffVal" id="qVal" type="text">
+                </div>
+                <div>
+                    <label class="lValText" for="cVal">c =</label>
+                    <input class="coeffVal" id="cVal" type="text">
+                    <label class="rValText" for="rVal">r =</label>
+                    <input class="coeffVal" id="rVal" type="text">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label class="lValText" for="dVal">d =</label>
+                    <input class="coeffVal" id="dVal" type="text">
+                    <label class="rValText" for="sVal">s =</label>
+                    <input class="coeffVal" id="sVal" type="text">
+                </div>
+                <hr>
+                <button id="cubicIF">Implicit Form</button>
+                <button id="interPt">Intersection Pt</button>
+
+                <h2><ins>Cubic Bézier Curve:</ins></h2>
+                <div style="margin-top: -10px;">
+                    <!-- <label class="lValText2" for="xP0">X0 =</label>
+                    <input class="coeffVal" id="xP0" type="text">
+                    <label class="rValText2" for="yP0">Y0 =</label>
+                    <input class="coeffVal" id="yP0" type="text"> -->
+                    <label class="lValText2" for="P0">P0 :</label>
+                    <input style="display: inline-block;" id="P0" type="text">
+                </div>
+                <div>
+                    <!-- <label class="lValText2" for="xP1">X1 =</label>
+                    <input class="coeffVal" id="xP1" type="text">
+                    <label class="rValText2" for="yP1">Y1 =</label>
+                    <input class="coeffVal" id="yP1" type="text"> -->
+                    <label class="lValText2" for="P1">P1 :</label>
+                    <input style="display: inline-block;" id="P1" type="text">
+                </div>
+                <div>
+                    <!-- <label class="lValText2" for="xP2">X2 =</label>
+                    <input class="coeffVal" id="xP2" type="text">
+                    <label class="rValText2" for="yP2">Y2 =</label>
+                    <input class="coeffVal" id="yP2" type="text"> -->
+                    <label class="lValText2" for="P2">P2 :</label>
+                    <input style="display: inline-block;" id="P2" type="text">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <!-- <label class="lValText2" for="xP3">X3 =</label>
+                    <input class="coeffVal" id="xP3" type="text">
+                    <label class="rValText2" for="yP3">Y3 =</label>
+                    <input class="coeffVal" id="yP3" type="text"> -->
+                    <label class="lValText2" for="P3">P3 :</label>
+                    <input style="display: inline-block;" id="P3" type="text">
+                </div>
+                <button id="bézierPF">Parametric Form</button>
+                <button id="bézierIF">Implicit Form</button>
+            </div>
         </div>
 </body>
 

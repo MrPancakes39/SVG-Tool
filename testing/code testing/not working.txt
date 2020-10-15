@@ -1,0 +1,35 @@
+// AVal = nerdamer(`${aVal}*${pVal}^2`).toString();
+    // BVal = nerdamer(`-2*${aVal}^2 * ${pVal}`).toString();
+    // CVal = nerdamer(`${aVal}^3`).toString();
+    // DVal = nerdamer(`2*${aVal}^2 *${pVal}*${sVal} -1*${aVal}^2 * ${qVal}*${rVal} +${aVal}*${bVal}*${qVal}^2 -1*${aVal}*${cVal}*${pVal}*${qVal} -2*${aVal}*${dVal}*${pVal}^2 -1*${bVal}^2 * ${pVal}*${qVal} +2*${bVal}*${cVal}*${pVal}^2`).toString();
+    // EVal = nerdamer(`-2*${aVal}^3 *${sVal} +${aVal}^2 *${bVal}*${rVal}+ 2*${aVal}^2 *${cVal}*${pVal} +2*${aVal}^2 *${dVal}*${pVal} -1*${aVal}*${bVal}^2 *${qVal} -3*${aVal}*${bVal}*${cVal}*${pVal} +${bVal}^3 *${pVal}`).toString();
+    // F1Val = nerdamer(`${aVal}^3 * ${sVal}^2 -1*${aVal}^2 *${bVal}*${rVal}*${sVal} -2*${aVal}^2 *${cVal}*${pVal}*${sVal} +${aVal}^2 *${cVal}*${rVal}^2 -2*${aVal}^2 *${dVal}*${pVal}*${sVal} +${aVal}^2 *${dVal}*${qVal}*${rVal} +${aVal}*${bVal}^2 *${qVal}*${sVal}`).toString();
+    // F2Val = nerdamer(`3*${aVal}*${bVal}*${cVal}*${pVal}*${sVal} -1*${aVal}*${bVal}*${cVal}*${qVal}*${rVal} -1*${aVal}*${bVal}*${dVal}*${qVal}^2 -2*${aVal}*${cVal}^2 *${pVal}*${rVal} +${aVal}*${cVal}^2 * ${qVal}^2 +${aVal}*${cVal}*${dVal}*${pVal}*${qVal} +${aVal}*${dVal}^2 * ${pVal}^2`).toString();
+    // F3Val = nerdamer(`-1*${bVal}^3 *${pVal}*${sVal} +${bVal}^2 *${cVal}*${pVal}*${rVal} +${bVal}^2 *${dVal}*${pVal}*${qVal} -1*${bVal}*${cVal}^2 *${pVal}*${qVal} -2*${bVal}*${cVal}*${dVal}*${pVal}^2 + ${cVal}^3 * ${pVal}^2`).toString();
+    // FVal = nerdamer(F1Val).add(F2Val).add(F3Val).toString();
+
+    // HVal = nerdamer(`${pVal}^3`).toString();
+    // IVal = nerdamer(`-2*${aVal}*${pVal}^2`).toString();
+    // JVal = nerdamer(`${aVal}^2 *${pVal}`).toString();
+    // KVal = nerdamer(`2*${aVal}*${pVal}^2 *${sVal} -3*${aVal}*${pVal}*${qVal}*${rVal} +${aVal}*${qVal}^3 +2*${bVal}*${pVal}^2 *${rVal} -1*${bVal}*${pVal}*${qVal}^2 +${cVal}*${pVal}^2 *${qVal} -2*${dVal}*${pVal}^3`).toString();
+    // LVal = nerdamer(`-2*${aVal}^2 *${pVal}*${sVal} +2*${aVal}^2 *${qVal}*${rVal} -1*${aVal}*${bVal}*${pVal}*${rVal} -1*${aVal}*${bVal}*${qVal}^2 +2*${aVal}*${dVal}*${pVal}^2 +${bVal}^2 *${pVal}*${qVal} -1*${bVal}*${cVal}*${pVal}^2`).toString();
+    // M1Val = nerdamer(`${aVal}^2 *${pVal}*${sVal}^2 -2*${aVal}^2 *${qVal}*${rVal}*${sVal} +${aVal}^2 * ${rVal}^3 +${aVal}*${bVal}*${pVal}*${rVal}*${sVal} +${aVal}*${bVal}*${qVal}^2 *${sVal} -1*${aVal}*${bVal}*${qVal}*${rVal}^2 -2*${aVal}*${cVal}*${pVal}*${rVal}^2`).toString();
+    // M2Val = nerdamer(`${aVal}*${cVal}*${qVal}^2 *${rVal} -2*${aVal}*${dVal}*${pVal}^2 *${sVal} +3*${aVal}*${dVal}*${pVal}*${qVal}*${rVal} -1*${aVal}*${dVal}*${qVal}^3 -1*${bVal}^2 *${pVal}*${qVal}*${sVal} +${bVal}^2 *${pVal}*${rVal}^2 +${bVal}*${cVal}*${pVal}^2 *${sVal}`).toString();
+    // M3Val = nerdamer(`-1*${bVal}*${cVal}*${pVal}*${qVal}*${rVal} -2*${bVal}*${dVal}*${pVal}^2 *${rVal} +${bVal}*${dVal}*${pVal}*${qVal}^2 +${cVal}^2 * ${pVal}^2 *${rVal} -1*${cVal}*${dVal}*${pVal}^2 *${qVal} +${dVal}^2 * ${pVal}^3`).toString();
+    // MVal = nerdamer(M1Val).add(M2Val).add(M3Val).toString();
+
+    //wolfEq = `(${sVal}-y)(${AVal}*x^2 + ${BVal}*xy + ${CVal}*y^2 + ${DVal}*x + ${EVal}*y + ${FVal})-(${dVal}-x)(${HVal}*x^2 + ${IVal}*xy + ${JVal}*y^2 + ${KVal}*x + ${LVal}*y + ${MVal})`;
+    //console.log(wolfEq);
+    // coeff1 = HVal;
+    // coeff2 = nerdamer(`${IVal} - ${AVal}`);
+    // coeff3 = nerdamer(`${JVal} + ${BVal}`);
+    // coeff4 = CVal;
+    // coeff5 = nerdamer(`${KVal} - ${dVal} * ${HVal} + ${sVal} * ${AVal}`);
+    // coeff6 = nerdamer(`${LVal} + ${dVal} * ${IVal} + ${DVal} + ${sVal} * ${BVal}`);
+    // coeff7 = nerdamer(`${dVal} * ${JVal} + ${EVal} + ${sVal} * ${CVal}`);
+    // coeff8 = nerdamer(`${MVal} + ${dVal} * ${KVal} + ${sVal} * ${DVal}`);
+    // coeff9 = nerdamer(`${dVal} * ${LVal} + ${FVal} + ${sVal} * ${EVal}`);
+    // coeff10 = nerdamer(`${dVal} * ${MVal} + ${sVal} * ${FVal}`);
+
+    // simpleEq = `${coeff1}*x^3 + ${coeff2}*x^2 *y + ${coeff3}*x*y^2 + ${coeff4}*y^3 + ${coeff5}*x^2 + ${coeff6}*xy + ${coeff7}*y^2 + ${coeff8}*x + ${coeff9}*y + ${coeff10}`;
+    // console.log(simpleEq);

@@ -1,31 +1,24 @@
-xValues = [];
-yValues = [];
-//arrOfPaths = [];
+let xValues = [];
+let yValues = [];
 
 let noms = [];
 let dens = [];
 
 function setupOptions() {
-    let sendButton = select("#sendButton");
-    sendButton.mousePressed(selectedPath);
+    select("#sendButton").mousePressed(selectedPath);
 
     nPoints = select("#nPoints");
-    let submitButton = select("#submitButton");
-    submitButton.mousePressed(coordinatePoints);
-
-    let cButton = select("#createTextButton");
-    cButton.mousePressed(createBlob);
-
-    let lButton = select("#LIPButton");
-    lButton.mousePressed(generateLIP);
+    select("#submitButton").mousePressed(coordinatePoints);
+    select("#createTextButton").mousePressed(createBlob);
+    select("#LIPButton").mousePressed(generateLIP);
 
     selPath_alt = select("#selPath_alt");
-    let sendButton_alt = select("#sendButton_alt");
-    sendButton_alt.mousePressed(selectedPath_alt);
+    select("#sendButton_alt").mousePressed(selectedPath_alt);
 }
 
+// Creates the options drop menu basd on the number of paths.
 function selPathSetup(nOptions) {
-    selPath = document.getElementById("selPath");
+    selPath = $("#selPath")[0];
     selPath.innerHTML = `<option value="">--Please Select a Path--</option>`;
     selPath.value = "";
 
@@ -37,24 +30,24 @@ function selPathSetup(nOptions) {
     }
 }
 
+// Gets the selected path from option menu.
 function selectedPath() {
-    selPathValue = selPath.value;
-    if (selPathValue !== "") {
-        let pathName = "Path_" + selPathValue;
+    if (selPath.value !== "") {
+        let pathName = "Path_" + selPath.value;
         path = document.getElementById(pathName);
         lenPath = path.getTotalLength();
-        plProp = lenPath;
+        propObj.plProp = lenPath;
         updateProperties();
         drawCanvas = false;
         getPoints();
     } else {
-        //console.log("Please select a path.");
         output("Please select a path.");
     }
 }
 
+// Gets the selected path from the custom input textbox.
 function selectedPath_alt() {
-    //console.log(selPath_alt.value());
+    // If the number entered has a "," remove it.
     if (selPath_alt.value().includes(",")) {
         tempArr = selPath_alt.value().split(",");
         selPathValue_alt = tempArr.join("");
@@ -66,16 +59,16 @@ function selectedPath_alt() {
         let pathName = "Path_" + selPathValue_alt;
         path = document.getElementById(pathName);
         lenPath = path.getTotalLength();
-        plProp = lenPath;
+        propObj.plProp = lenPath;
         updateProperties();
         drawCanvas = false;
         getPoints();
     } else {
-        //console.log("Not a valid path value!!");
         output("Not a valid path value!!");
     }
 }
 
+// Gets and stores the coordinate points in two arrays.
 function coordinatePoints() {
     output("Points submitted");
 
@@ -95,6 +88,7 @@ function coordinatePoints() {
     }
 }
 
+// Takes the coordinate points and put them in a file.
 function createBlob() {
     blob = [];
     for (let i = 0; i < xValues.length; i++) {
@@ -103,6 +97,7 @@ function createBlob() {
     saveStrings(blob, 'coodrinateList.txt');
 }
 
+// Generates a Lagrange Interpolation Polynomial from the arrays.
 function generateLIP() {
     let den = 1;
     let nom = "";
@@ -138,11 +133,11 @@ function generateLIP() {
         saveStrings(saveArr, 'Curve.txt');
 
     } else {
-        //console.log("It's not continuous.");
         output("It's not continuous.");
     }
 }
 
+// Checks continuity.
 function checkContinuity() {
     let arr = xValues.slice().sort();
     let continuity = true;
@@ -154,17 +149,3 @@ function checkContinuity() {
     }
     return continuity;
 }
-
-// function createEquation() {
-
-// }
-
-// function getPaths() {
-//     tempArr = Array.from(document.getElementById("svg").childNodes);
-//     tempArr.forEach(node => {
-//         if (node.nodeName == "path") {
-//             arrOfPaths.push(node);
-//         }
-//     })
-//     console.log(arrOfPaths);
-// }

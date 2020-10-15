@@ -1,88 +1,89 @@
 .hidden {
-    display: none;
+  display: none;
 }
 
 .clr {
-    clear: both;
+  clear: both;
 }
 
 /* Styling for headings */
 h2 {
-    font-family: Garamond, Arial, Times, Georgia, Helvetica, sans-serif;
-    font-size: 1.7em;
+  font-family: Garamond, Arial, Times, Georgia, Helvetica, sans-serif;
+  font-size: 1.7em;
 }
 
 h3 {
-    font-family: Garamond, Arial, Times, Georgia, Helvetica, sans-serif;
-    font-size: 1.4em;
+  font-family: Garamond, Arial, Times, Georgia, Helvetica, sans-serif;
+  font-size: 1.4em;
 }
 
 /* Styling for view div */
 
 .Path {
-    fill: none;
-    stroke: #707070;
-    stroke-width: 10;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+  fill: none;
+  stroke: #707070;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* Styling for Tools */
 
 label {
-    margin-top: 10px;
-    display: block;
-    font-weight: 600;
-    color: #9644AA;
-    font-family: 'Times New Roman', Times, serif;
+  margin-top: 10px;
+  display: block;
+  font-weight: 600;
+  color: #9644aa;
+  font-family: "Times New Roman", Times, serif;
 }
 
 button,
 select {
-    margin-top: 10px;
-    display: block;
-    color: #FFF;
-    background-color: #3633F0;
-    border-color: #3633F0;
-    text-align: center;
-    font-size: 12px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    letter-spacing: .1em;
-    text-decoration: none;
-    border-radius: 4px;
+  margin-top: 10px;
+  display: block;
+  color: #fff;
+  background-color: #3633f0;
+  border-color: #3633f0;
+  text-align: center;
+  font-size: 12px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border-radius: 4px;
 }
 
 button:hover,
 button:focus {
-    color: #FFF;
-    background-color: #302DD8;
-    border-color: #302DD8;
+  color: #fff;
+  background-color: #302dd8;
+  border-color: #302dd8;
 }
 
 #orgSize,
 #revSize {
-    margin: 0px;
-    display: inline;
+  margin: 0px;
+  display: inline;
 }
 
 input[type="text"],
 textarea {
-    margin-top: 10px;
-    display: block;
-    padding: 6px 0px;
-    background-color: #fff;
-    border: 1px solid #D1D1D1;
-    border-radius: 4px;
-    box-shadow: none;
-    box-sizing: border-box;
+  margin-top: 10px;
+  display: block;
+  padding: 6px 0px;
+  background-color: #fff;
+  border: 1px solid #d1d1d1;
+  border-radius: 4px;
+  box-shadow: none;
+  box-sizing: border-box;
 }
 
 /* Styling for Properties */
 
 p {
-    font-weight: 600;
-    color: #9644AA;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 600;
+  color: #9644aa;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 /* Styling for Options*/
@@ -90,140 +91,186 @@ p {
 #nPLabel,
 #sendButton,
 #submitButton {
-    display: Inline;
+  display: Inline;
 }
 
 #sendButton,
 #submitButton {
-    margin-left: 2px;
+  margin-left: 2px;
 }
 
 .seperator {
-    margin: 0px 10px;
+  margin: 0px 10px;
 }
 
 #nPoints {
-    width: 30px;
-    display: Inline;
-    text-align: center;
+  width: 30px;
+  display: Inline;
+  text-align: center;
 }
 
 #selPath {
-    height: 23.75px;
-    display: Inline;
-    text-align: center;
+  height: 23.75px;
+  display: Inline;
+  text-align: center;
 }
 
 select {
-    color: #fff;
-    background-color: #4b2d00;
-    border-color: #4b2d00;
-    border-style: outset;
+  color: #fff;
+  background-color: #4b2d00;
+  border-color: #4b2d00;
+  border-style: outset;
 }
 
-/* Styling for Advanced Div*/
+/* Styling for Left Div*/
 
 #loadPathButton,
 #transformButton,
 #showPointsButton,
 #selPLabel_alt {
-    display: Inline;
+  display: Inline;
 }
 
 #showPointsButton {
-    width: 82px;
-    font-size: 11.6px;
-    height: 23.40px;
-    padding: 0px;
+  width: 82px;
+  font-size: 11.6px;
+  height: 23.4px;
+  padding: 0px;
 }
 
-/* .smaller {
-    width: 82px;
-    height: 23.75px;
-    font-size: 11.6px;
-    padding: 1px 0px;
-} */
-
 #submitCustomButton {
-    color: #FFF;
-    background-color: #4CAF50;
-    border-color: #4CAF50;
-    border-radius: 0px;
-    border-style: none;
-    margin: 10px 0px 12px;
-    padding: 8px 16px;
+  color: #fff;
+  background-color: #4caf50;
+  border-color: #4caf50;
+  border-radius: 0px;
+  border-style: none;
+  margin: 10px 0px 12px;
+  padding: 8px 16px;
 }
 
 #submitCustomButton:hover {
-    box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2), 0 6px 16px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2), 0 6px 16px 0 rgba(0, 0, 0, 0.19);
 }
 
 #customInput {
-    margin: 16px 0px 14px;
+  margin: 16px 0px 14px;
 }
 
 #selPath_alt {
-    width: 60px;
-    display: Inline;
-    text-align: center;
-    margin-top: 0px;
+  width: 60px;
+  display: Inline;
+  text-align: center;
+  margin-top: 0px;
 }
 
 #sendButton_alt {
-    display: Inline;
-    margin-top: 0px;
-    margin-left: 2px;
+  display: Inline;
+  margin-top: 0px;
+  margin-left: 2px;
 }
 
 #output_field {
-    width: 240px;
-    height: 60px;
-    font-size: 20px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    resize: none;
+  width: 240px;
+  height: 60px;
+  font-size: 20px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  resize: none;
 }
 
 #output_header {
-    margin: 11.288px 0px;
+  margin: 11.288px 0px;
+}
+
+/* Styling for Right Div*/
+
+hr {
+  background-color: #9644aa;
+  color: #9644aa;
+  border-style: solid;
+  border-width: initial;
+  border-top: medium none;
+  margin: 0%;
+  width: 220px;
+}
+
+input[type="text"].coeffVal {
+  width: 60px;
+  display: inline-block;
+}
+
+.lValText {
+  display: Inline;
+  margin-left: 5px;
+}
+
+.rValText {
+  display: Inline;
+  margin-left: 35px;
+}
+
+.lValText2 {
+  display: Inline;
+}
+
+.rValText2 {
+  display: Inline;
+  margin-left: 15px;
+}
+
+#cubicIF,
+#interPt,
+#bézierPF,
+#bézierIF {
+  display: Inline;
 }
 
 /* Styling the divs */
 
 #main {
-    width: 950px;
-    height: 650px;
+  width: 1300px;
+  height: 650px;
 }
 
 #normal {
-    width: 650px;
-    height: 0px;
-    float: left;
+  width: 650px;
+  height: 0px;
+  float: left;
 }
 
 #advanced {
-    width: 300px;
-    height: 0px;
-    float: right;
+  width: 650px;
+  height: 0px;
+  float: right;
 }
 
 #top {
-    width: 650px;
-    height: 400px;
+  width: 650px;
+  height: 400px;
 }
 
 #bottom {
-    width: 650px;
-    height: 250px;
+  width: 650px;
+  height: 250px;
 }
 
 #view,
 #properties {
-    width: 300px;
-    float: left;
+  width: 300px;
+  float: left;
 }
 
 #tools,
 #options {
-    width: 300px;
-    float: right;
+  width: 300px;
+  float: right;
+}
+
+#left {
+  width: 300px;
+  float: left;
+}
+
+#right {
+  width: 350px;
+  float: right;
 }

@@ -1,49 +1,36 @@
 function setupTools() {
-    svgLoad = select("#svgLoad");
-    let loadButton = select("#loadButton");
-    loadButton.mousePressed(loadSVG);
-
-    let orgSize = select("#orgSize");
-    orgSize.mousePressed(originalSize);
-
-    let revSize = select("#revSize");
-    revSize.mousePressed(revertSize);
+    select("#loadButton").mousePressed(loadSVG);
+    select("#orgSize").mousePressed(originalSize);
+    select("#revSize").mousePressed(revertSize);
 
     setW = select("#setW");
-    let setWButton = select("#setWButton");
-    setWButton.mousePressed(setWidth);
+    select("#setWButton").mousePressed(setWidth);
 
     setH = select("#setH");
-    let setHButton = select("#setHButton");
-    setHButton.mousePressed(setHeight);
+    select("#setHButton").mousePressed(setHeight);
 }
 
 function loadSVG() {
+    // Checks run before SVG Loads.
     let canLoad = true;
-    svg = document.getElementById("svg");
-    placeholder = document.getElementById("placeholder");
-
-    if (placeholder) {
-        document.getElementById("view").removeChild(placeholder);
+    let viewDiv = $("#view")[0];
+    if ($("#placeholder")[0]) {
+        viewDiv.removeChild($("#placeholder")[0]);
+    } else if ($("#svg")[0]) {
+        viewDiv.removeChild($("#svg")[0]);
     } else {
-        if (svg) {
-            document.getElementById("view").removeChild(svg);
-        } else {
-            canLoad == false;
-            //console.log("Can't Load SVG.");
-            output("Can't Load SVG.");
-        }
+        viewDiv.innerHTML = "<h2><ins>View SVG:</ins></h2>";
     }
 
+    // If the SVG can be loaded, load it.
     if (canLoad) {
-        document.getElementById("view").innerHTML += svgLoad.value();
+        $("#view")[0].innerHTML += $("#svgLoad").val();
 
-        svg = document.getElementById("svg");
-
+        let svg = $("#svg")[0];
         if (svg) {
             nPaths = svg.childElementCount;
 
-            npProp = nPaths;
+            propObj.npProp = nPaths;
             updateProperties();
 
             selPathSetup(nPaths);
@@ -54,6 +41,7 @@ function loadSVG() {
             takeM.w = w;
             takeM.h = h;
 
+            // Scales the svg to fit the div.
             let scale;
             if (w <= h) {
                 scale = 240 / h;
@@ -64,49 +52,58 @@ function loadSVG() {
             newH = String(h * scale);
             newW = String(w * scale);
 
-            takeM.wSVG = newW;
-            takeM.hSVG = newH;
+            // <Start> For the canvas calculation.
+            canvScale = 240 / w;
+            takeM.wSVG = String(w * canvScale);
+            takeM.hSVG = String(h * canvScale);
+            // <End> Used for tthe mapping.
 
             svg.setAttribute("width", newW);
             svg.setAttribute("height", newH);
 
-            wProp = newW;
-            hProp = newH;
+            propObj.wProp = newW;
+            propObj.hProp = newH;
             updateProperties();
         } else {
-            document.getElementById("view").innerHTML = `<h2><ins>View SVG:</ins></h2>
-                                                         <img id="placeholder" src="images/placeholder_alt.png">`;
-            //console.log("Invalid SVG!!");
+            viewDiv.innerHTML = `<h2><ins>View SVG:</ins></h2>
+                                 <img id="placeholder" src="images/placeholder_alt.png">`;
             output(`Can't Load SVG or It's an Invalid SVG!!`);
         }
     }
 }
 
+// Tests if the width of the SVG. If it is too big for the div, it resize it.
+function resizeDiv(wid) {
+    if (wid > 350) {
+        tdivWidth = float(wid) + 350;
+        mdivWidth = tdivWidth + 300;
+        topDiv = $("#top").css("width", `${tdivWidth}px`);
+        mainDiv = $("#main").css("width", `${mdivWidth}px`);
+    } else {
+        topDiv = $("#top").css("width", `650px`);
+        mainDiv = $("#main").css("width", `950px`);
+    }
+}
+
+// The following functions is to set the size of the SVG.
 function originalSize() {
     svg.setAttribute("width", w);
     svg.setAttribute("height", h);
+    resizeDiv(w);
 
-    wProp = w;
-    hProp = h;
+    propObj.wProp = w;
+    propObj.hProp = h;
     updateProperties();
-
-    if (w > 350) {
-        divWidth = w + 350;
-        topDiv = document.getElementById("top").style.width = `${divWidth}px`;
-    } else {
-        topDiv = document.getElementById("top").style.width = `650px`;
-    }
 }
 
 function revertSize() {
     svg.setAttribute("width", newW);
     svg.setAttribute("height", newH);
+    resizeDiv(newW);
 
-    wProp = newW;
-    hProp = newH;
+    propObj.wProp = newW;
+    propObj.hProp = newH;
     updateProperties();
-
-    topDiv = document.getElementById("top").style.width = `650px`;
 }
 
 function setWidth() {
@@ -125,19 +122,12 @@ function setWidth() {
 
                 svg.setAttribute("width", String(customW));
                 svg.setAttribute("height", String(customH));
+                resizeDiv(customW);
 
-                wProp = customW;
-                hProp = customH;
+                propObj.wProp = customW;
+                propObj.hProp = customH;
                 updateProperties();
-
-                if (customW > 350) {
-                    divWidth = customW + 350;
-                    topDiv = document.getElementById("top").style.width = `${divWidth}px`;
-                } else {
-                    topDiv = document.getElementById("top").style.width = `650px`;
-                }
             }
-
         } catch (error) {
             console.error(error);
             output("There is an error in console.");
@@ -161,19 +151,12 @@ function setHeight() {
 
                 svg.setAttribute("width", String(customW));
                 svg.setAttribute("height", String(customH));
+                resizeDiv(customW);
 
-                wProp = customW;
-                hProp = customH;
+                propObj.wProp = customW;
+                propObj.hProp = customH;
                 updateProperties();
-
-                if (customW > 350) {
-                    divWidth = customW + 350;
-                    topDiv = document.getElementById("top").style.width = `${divWidth}px`;
-                } else {
-                    topDiv = document.getElementById("top").style.width = `650px`;
-                }
             }
-
         } catch (error) {
             console.error(error);
             output("There is an error in console.");
