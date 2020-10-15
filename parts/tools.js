@@ -19,34 +19,67 @@ function setupTools() {
 }
 
 function loadSVG() {
-    document.getElementById("view").removeChild(svg);
-    document.getElementById("view").innerHTML += svgLoad.value();
-
+    let canLoad = true;
     svg = document.getElementById("svg");
-    nPaths = svg.childElementCount;
+    placeholder = document.getElementById("placeholder");
 
-    npProp = nPaths;
-    updateProperties();
-
-    w = svg.getAttribute("width");
-    h = svg.getAttribute("height");
-
-    let scale;
-    if (w <= h) {
-        scale = 240 / h;
+    if (placeholder) {
+        document.getElementById("view").removeChild(placeholder);
     } else {
-        scale = 240 / w;
+        if (svg) {
+            document.getElementById("view").removeChild(svg);
+        } else {
+            canLoad == false;
+            //console.log("Can't Load SVG.");
+            output("Can't Load SVG.");
+        }
     }
 
-    newH = String(h * scale);
-    newW = String(w * scale);
+    if (canLoad) {
+        document.getElementById("view").innerHTML += svgLoad.value();
 
-    svg.setAttribute("width", newW);
-    svg.setAttribute("height", newH);
+        svg = document.getElementById("svg");
 
-    wProp = newW;
-    hProp = newH;
-    updateProperties();
+        if (svg) {
+            nPaths = svg.childElementCount;
+
+            npProp = nPaths;
+            updateProperties();
+
+            selPathSetup(nPaths);
+
+            w = svg.getAttribute("width");
+            h = svg.getAttribute("height");
+
+            takeM.w = w;
+            takeM.h = h;
+
+            let scale;
+            if (w <= h) {
+                scale = 240 / h;
+            } else {
+                scale = 240 / w;
+            }
+
+            newH = String(h * scale);
+            newW = String(w * scale);
+
+            takeM.wSVG = newW;
+            takeM.hSVG = newH;
+
+            svg.setAttribute("width", newW);
+            svg.setAttribute("height", newH);
+
+            wProp = newW;
+            hProp = newH;
+            updateProperties();
+        } else {
+            document.getElementById("view").innerHTML = `<h2><ins>View SVG:</ins></h2>
+                                                         <img id="placeholder" src="images/placeholder_alt.png">`;
+            //console.log("Invalid SVG!!");
+            output(`Can't Load SVG or It's an Invalid SVG!!`);
+        }
+    }
 }
 
 function originalSize() {
@@ -107,6 +140,7 @@ function setWidth() {
 
         } catch (error) {
             console.error(error);
+            output("There is an error in console.");
         }
     }
 }
@@ -136,12 +170,13 @@ function setHeight() {
                     divWidth = customW + 350;
                     topDiv = document.getElementById("top").style.width = `${divWidth}px`;
                 } else {
-                    topDiv = document.getElementById("top").style.width = `350px`;
+                    topDiv = document.getElementById("top").style.width = `650px`;
                 }
             }
 
         } catch (error) {
             console.error(error);
+            output("There is an error in console.");
         }
     }
 }

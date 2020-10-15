@@ -1,8 +1,11 @@
 xValues = [];
 yValues = [];
+//arrOfPaths = [];
+
+let noms = [];
+let dens = [];
 
 function setupOptions() {
-    selPath = select("#selPath");
     let sendButton = select("#sendButton");
     sendButton.mousePressed(selectedPath);
 
@@ -15,26 +18,73 @@ function setupOptions() {
 
     let lButton = select("#LIPButton");
     lButton.mousePressed(generateLIP);
+
+    selPath_alt = select("#selPath_alt");
+    let sendButton_alt = select("#sendButton_alt");
+    sendButton_alt.mousePressed(selectedPath_alt);
+}
+
+function selPathSetup(nOptions) {
+    selPath = document.getElementById("selPath");
+    selPath.innerHTML = `<option value="">--Please Select a Path--</option>`;
+    selPath.value = "";
+
+    for (let i = 1; i < nOptions + 1; i++) {
+        let option = document.createElement("option");
+        option.textContent = `Path_${i}`;
+        option.setAttribute("value", `${i}`);
+        selPath.appendChild(option);
+    }
 }
 
 function selectedPath() {
-    if (0 < selPath.value() && selPath.value() < (nPaths + 1)) {
-        let pathName = "Path_" + selPath.value();
+    selPathValue = selPath.value;
+    if (selPathValue !== "") {
+        let pathName = "Path_" + selPathValue;
         path = document.getElementById(pathName);
         lenPath = path.getTotalLength();
         plProp = lenPath;
         updateProperties();
+        drawCanvas = false;
+        getPoints();
     } else {
-        console.log("Not a valid path value!!");
+        //console.log("Please select a path.");
+        output("Please select a path.");
+    }
+}
+
+function selectedPath_alt() {
+    //console.log(selPath_alt.value());
+    if (selPath_alt.value().includes(",")) {
+        tempArr = selPath_alt.value().split(",");
+        selPathValue_alt = tempArr.join("");
+    } else {
+        selPathValue_alt = selPath_alt.value();
+    }
+
+    if (0 < selPathValue_alt && selPathValue_alt < (nPaths + 1)) {
+        let pathName = "Path_" + selPathValue_alt;
+        path = document.getElementById(pathName);
+        lenPath = path.getTotalLength();
+        plProp = lenPath;
+        updateProperties();
+        drawCanvas = false;
+        getPoints();
+    } else {
+        //console.log("Not a valid path value!!");
+        output("Not a valid path value!!");
     }
 }
 
 function coordinatePoints() {
+    output("Points submitted");
+
     xValues = [];
     yValues = [];
 
     if (nPoints.value() - 1 == 0) {
         console.log("Infinity Error!!");
+        output("Infinity Error!!");
     } else {
         let ratio = lenPath / (nPoints.value() - 1);
         for (let i = 0; i <= lenPath; i += ratio) {
@@ -56,10 +106,7 @@ function createBlob() {
 function generateLIP() {
     let den = 1;
     let nom = "";
-    let equation = "";
-
-    const noms = []
-    const dens = [];
+    equation = "";
 
     let continuous = checkContinuity();
 
@@ -85,10 +132,14 @@ function generateLIP() {
             }
         }
 
-        saveStrings([equation], 'Curve.txt');
+        simEq = getSimpleLIP();
+        let saveArr = [equation, "", simEq];
+
+        saveStrings(saveArr, 'Curve.txt');
 
     } else {
-        console.log("It's not continuous.")
+        //console.log("It's not continuous.");
+        output("It's not continuous.");
     }
 }
 
@@ -103,3 +154,17 @@ function checkContinuity() {
     }
     return continuity;
 }
+
+// function createEquation() {
+
+// }
+
+// function getPaths() {
+//     tempArr = Array.from(document.getElementById("svg").childNodes);
+//     tempArr.forEach(node => {
+//         if (node.nodeName == "path") {
+//             arrOfPaths.push(node);
+//         }
+//     })
+//     console.log(arrOfPaths);
+// }

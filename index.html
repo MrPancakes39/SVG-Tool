@@ -6,74 +6,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>SVG Tool 2.0</title>
+    <title>SVG Tool 3.0</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="icon" href="icons/simplified_icon.ico">
 
     <script src="libraries/p5.min.js"></script>
-    <script src="libraries/p5.dom.min.js"></script>
+    <script src="libraries/addons/p5.dom.min.js"></script>
+
+    <script src="libraries/nerdamer.core.js"></script>
+    <script src="libraries/addons/Algebra.js"></script>
 
     <script src="parts/tools.js"></script>
+    <script src="parts/simplifier.js"></script>
     <script src="parts/options.js"></script>
     <script src="parts/properties.js"></script>
 
+    <script src="point.js"></script>
     <script src="sketch.js"></script>
 </head>
 
 <body>
     <div id="main">
-        <div id="top">
-            <div id="view">
-                <h2><ins>View SVG:</ins></h2>
-                <svg id="svg" viewBox="0 0 240 240" width="240" height="240">
-                    <path class="Path" id="Path" data-name="Path"
-                        d="m 5.0105181,234.9295 c 0,0 31.5069999,-220.149 68.5999999,-220.149 37.093012,0 41.079012,220.149 79.764012,220.149 38.685,0 74.978,-220.149 74.978,-220.149" />
-                </svg>
+        <div id="normal">
+            <div id="top">
+                <div id="view">
+                    <h2><ins>View SVG:</ins></h2>
+                    <img id="placeholder" src="images/placeholder_alt.png">
+                </div>
+                <div id="tools">
+                    <h2><ins>Tools:</ins></h2>
+                    <label for="svgLoad">SVG's code:</label>
+                    <input id="svgLoad" type="text">
+                    <button id="loadButton">Load SVG</button>
+
+                    <h3><ins>Custom:</ins></h3>
+                    <button id="orgSize">Original Size</button>
+                    <button id="revSize">Revert Size</button>
+
+                    <label class="hidden" for="setW">Set Width:</label>
+                    <input id="setW" type="text">
+                    <button id="setWButton">Set Width</button>
+
+                    <label class="hidden" for="setH">Set Height:</label>
+                    <input id="setH" type="text">
+                    <button id="setHButton">Set Height</button>
+                </div>
             </div>
-            <div id="tools">
-                <h2><ins>Tools:</ins></h2>
-                <label for="svgLoad">SVG's code:</label>
-                <input id="svgLoad" type="text">
-                <button id="loadButton">Load SVG</button>
+            <div class="clr" id="bottom">
+                <div id="properties">
+                    <h2><ins>Properties:</ins></h2>
+                    <p id="pw">Width: -</p>
+                    <p id="ph">Height: -</p>
+                    <p id="np">Number of Paths: -</p>
+                    <p id="pl">Selected Path Length: -</p>
+                </div>
 
-                <h3><ins>Custom:</ins></h3>
-                <button id="orgSize">Original Size</button>
-                <button id="revSize">Revert Size</button>
+                <div id="options">
+                    <h2><ins>Options:</ins></h2>
+                    <select id="selPath">
+                        <option value="">--Please Select a Path--</option>
+                    </select>
+                    <button id="sendButton">Send</button>
 
-                <label class="hidden" for="setW">Set Width:</label>
-                <input id="setW" type="text">
-                <button id="setWButton">Set Width</button>
+                    <p class="seperator"></p>
 
-                <label class="hidden" for="setH">Set Height:</label>
-                <input id="setH" type="text">
-                <button id="setHButton">Set Height</button>
+                    <label id="nPLabel" for="nPoints">How many points?:</label>
+                    <input id="nPoints" type="text">
+                    <button id="submitButton">Submit</button>
+
+                    <button id="createTextButton">Download Coordinate List</button>
+                    <button id="LIPButton">Download a Lagrange Curve Equation</button>
+                </div>
             </div>
         </div>
-        <div class="clr" id="bottom">
-            <div id="properties">
-                <h2><ins>Properties:</ins></h2>
-                <p id="pw">Width: -</p>
-                <p id="ph">Height: -</p>
-                <p id="np">Number of Paths: -</p>
-                <p id="pl">Selected Path Length: -</p>
-            </div>
+        <div class="clr" id="advanced">
+            <h2><ins>Pick Custom Points:</ins></h2>
+            <button id="loadPathButton">Load Path</button>
+            <button id="transformButton">Transform</button>
+            <button id="showPointsButton">Show Points</button>
+            <button id="submitCustomButton">Submit Selected Points</button>
 
-            <div id="options">
-                <h2><ins>Options:</ins></h2>
-                <label id="selPLabel" for="selPath">Select a Path:</label>
-                <input id="selPath" type="text">
-                <button id="sendButton">Send</button>
+            <h3 id="customInput"><ins>Custom Input:</ins></h3>
+            <label id="selPLabel_alt" for="selPath_alt">Select a Path:</label>
+            <input id="selPath_alt" type="text">
+            <button id="sendButton_alt">Send</button>
 
-                <p class="seperator"></p>
-
-                <label id="nPLabel" for="nPoints">How many points?:</label>
-                <input id="nPoints" type="text">
-                <button id="submitButton">Submit</button>
-
-                <button id="createTextButton">Download Coordinate List</button>
-                <button id="LIPButton">Download a Lagrange Curve Equation</button>
-            </div>
+            <h2 id="output_header"><ins>Output:</ins></h2>
+            <textarea id="output_field" type="text" readonly></textarea>
+            <button id="clearButton">Clear Output</button>
         </div>
-    </div>
 </body>
 
 </html>

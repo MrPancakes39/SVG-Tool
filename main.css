@@ -37,7 +37,8 @@ label {
     font-family: 'Times New Roman', Times, serif;
 }
 
-button {
+button,
+select {
     margin-top: 10px;
     display: block;
     color: #FFF;
@@ -64,7 +65,8 @@ button:focus {
     display: inline;
 }
 
-input[type="text"] {
+input[type="text"],
+textarea {
     margin-top: 10px;
     display: block;
     padding: 6px 0px;
@@ -85,7 +87,6 @@ p {
 
 /* Styling for Options*/
 
-#selPLabel,
 #nPLabel,
 #sendButton,
 #submitButton {
@@ -101,18 +102,108 @@ p {
     margin: 0px 10px;
 }
 
-#selPath,
 #nPoints {
     width: 30px;
     display: Inline;
     text-align: center;
 }
 
+#selPath {
+    height: 23.75px;
+    display: Inline;
+    text-align: center;
+}
+
+select {
+    color: #fff;
+    background-color: #4b2d00;
+    border-color: #4b2d00;
+    border-style: outset;
+}
+
+/* Styling for Advanced Div*/
+
+#loadPathButton,
+#transformButton,
+#showPointsButton,
+#selPLabel_alt {
+    display: Inline;
+}
+
+#showPointsButton {
+    width: 82px;
+    font-size: 11.6px;
+    height: 23.40px;
+    padding: 0px;
+}
+
+/* .smaller {
+    width: 82px;
+    height: 23.75px;
+    font-size: 11.6px;
+    padding: 1px 0px;
+} */
+
+#submitCustomButton {
+    color: #FFF;
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+    border-radius: 0px;
+    border-style: none;
+    margin: 10px 0px 12px;
+    padding: 8px 16px;
+}
+
+#submitCustomButton:hover {
+    box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2), 0 6px 16px 0 rgba(0, 0, 0, 0.19);
+}
+
+#customInput {
+    margin: 16px 0px 14px;
+}
+
+#selPath_alt {
+    width: 60px;
+    display: Inline;
+    text-align: center;
+    margin-top: 0px;
+}
+
+#sendButton_alt {
+    display: Inline;
+    margin-top: 0px;
+    margin-left: 2px;
+}
+
+#output_field {
+    width: 240px;
+    height: 60px;
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    resize: none;
+}
+
+#output_header {
+    margin: 11.288px 0px;
+}
+
 /* Styling the divs */
 
 #main {
-    width: 650px;
+    width: 950px;
     height: 650px;
+}
+
+#normal {
+    width: 650px;
+    height: 0px;
+    float: left;
+}
+
+#advanced {
+    width: 300px;
+    height: 0px;
+    float: right;
 }
 
 #top {

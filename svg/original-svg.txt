@@ -1,0 +1,7 @@
+<svg id="svg" viewBox="0 0 240 240" width="240" height="240">
+	<path
+	 id="Path_1"
+	 data-name="Path_1"
+	 d="m 5.0105181,234.9295 c 0,0 31.5069999,-220.149 68.5999999,-220.149 37.093012,0 41.079012,220.149 79.764012,220.149 38.685,0 74.978,-220.149 74.978,-220.149"
+	 style="fill:none;stroke:#707070;stroke-width:10;stroke-linecap:round;stroke-linejoin:round" />
+</svg>
