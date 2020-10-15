@@ -17,15 +17,15 @@ function setupOptions() {
 }
 
 // Creates the options drop menu basd on the number of paths.
-function selPathSetup(nOptions) {
+function selPathSetup(list) {
     selPath = $("#selPath")[0];
     selPath.innerHTML = `<option value="">--Please Select a Path--</option>`;
     selPath.value = "";
 
-    for (let i = 1; i < nOptions + 1; i++) {
+    for (let i = 0; i < list.length; i++) {
         let option = document.createElement("option");
-        option.textContent = `Path_${i}`;
-        option.setAttribute("value", `${i}`);
+        option.textContent = list[i].name;
+        option.setAttribute("value", `${list[i].data}`);
         selPath.appendChild(option);
     }
 }
@@ -33,7 +33,7 @@ function selPathSetup(nOptions) {
 // Gets the selected path from option menu.
 function selectedPath() {
     if (selPath.value !== "") {
-        let pathName = "Path_" + selPath.value;
+        let pathName = selPath.querySelector(`option[value="${selPath.value}"]`).textContent;
         path = document.getElementById(pathName);
         lenPath = path.getTotalLength();
         propObj.plProp = lenPath;
@@ -46,6 +46,28 @@ function selectedPath() {
 }
 
 // Gets the selected path from the custom input textbox.
+// function selectedPath_alt() {
+//     // If the number entered has a "," remove it.
+//     if (selPath_alt.value().includes(",")) {
+//         tempArr = selPath_alt.value().split(",");
+//         selPathValue_alt = tempArr.join("");
+//     } else {
+//         selPathValue_alt = selPath_alt.value();
+//     }
+
+//     if (0 < selPathValue_alt && selPathValue_alt < (nPaths + 1)) {
+//         let pathName = "Path_" + selPathValue_alt;
+//         path = document.getElementById(pathName);
+//         lenPath = path.getTotalLength();
+//         propObj.plProp = lenPath;
+//         updateProperties();
+//         drawCanvas = false;
+//         getPoints();
+//     } else {
+//         output("Not a valid path value!!");
+//     }
+// }
+
 function selectedPath_alt() {
     // If the number entered has a "," remove it.
     if (selPath_alt.value().includes(",")) {
@@ -55,8 +77,8 @@ function selectedPath_alt() {
         selPathValue_alt = selPath_alt.value();
     }
 
-    if (0 < selPathValue_alt && selPathValue_alt < (nPaths + 1)) {
-        let pathName = "Path_" + selPathValue_alt;
+    if (0 < selPathValue_alt && selPathValue_alt < (pathList.length + 1)) {
+        let pathName = pathList[selPathValue_alt - 1].name;
         path = document.getElementById(pathName);
         lenPath = path.getTotalLength();
         propObj.plProp = lenPath;

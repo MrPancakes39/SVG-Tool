@@ -78,6 +78,15 @@ textarea {
   box-sizing: border-box;
 }
 
+#tools h3,
+#options h2 {
+  margin: 15px 0px;
+}
+
+#tools p {
+  margin: 10px 0px 2px;
+}
+
 /* Styling for Properties */
 
 p {
@@ -120,6 +129,22 @@ select {
   background-color: #4b2d00;
   border-color: #4b2d00;
   border-style: outset;
+}
+
+#allParamPath {
+  width: 234px;
+}
+
+#setW,
+#setH {
+  display: inline-block;
+  width: 106px;
+}
+
+#setWButton,
+#setHButton {
+  display: Inline;
+  margin-left: 6px;
 }
 
 /* Styling for Left Div*/
@@ -210,17 +235,20 @@ input[type="text"].coeffVal {
 
 .lValText2 {
   display: Inline;
+  margin-left: 20px;
 }
 
-.rValText2 {
+/* .rValText2 {
   display: Inline;
   margin-left: 15px;
-}
+} */
 
 #cubicIF,
 #interPt,
 #bézierPF,
-#bézierIF {
+#bézierIF,
+#bézierPFPath,
+#bézierIFPath {
   display: Inline;
 }
 
@@ -243,34 +271,27 @@ input[type="text"].coeffVal {
   float: right;
 }
 
-#top {
-  width: 650px;
-  height: 400px;
-}
-
-#bottom {
-  width: 650px;
-  height: 250px;
-}
-
-#view,
-#properties {
+#normal-left {
   width: 300px;
   float: left;
 }
 
-#tools,
-#options {
+#normal-right {
   width: 300px;
   float: right;
+  margin-left: 50px;
 }
 
-#left {
+#advanced-left {
   width: 300px;
   float: left;
 }
 
-#right {
+#advanced-right {
   width: 350px;
   float: right;
+}
+
+#view {
+  height: 389px;
 }

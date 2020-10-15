@@ -15,7 +15,7 @@ function setupCanvas() {
 
     canvasMove = $("#canvas")[0];
     tempBtn = $("#loadPathButton")[0];
-    $("#left")[0].insertBefore(canvasMove, tempBtn);
+    $("#advanced-left")[0].insertBefore(canvasMove, tempBtn);
 }
 
 // Adds event listener to each button.

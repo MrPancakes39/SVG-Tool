@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>SVG Tool 4.0</title>
+    <title>SVG Tool 5.0</title>
     <link rel="stylesheet" href="main.css">
     <link rel="icon" href="images/simplified_icon.ico">
 
@@ -23,19 +23,28 @@
     <script src="parts/computation.js"></script>
     <script src="parts/options.js"></script>
     <script src="parts/object.js"></script>
+    <script src="parts/bézier.js"></script>
 
     <script src="sketch.js"></script>
-    <!-- <script src="test.js"></script> -->
 </head>
 
 <body>
     <div id="main">
         <div id="normal">
-            <div id="top">
+            <div id="normal-left">
                 <div id="view">
                     <h2><ins>View SVG:</ins></h2>
                     <img id="placeholder" src="images/placeholder_alt.png">
                 </div>
+                <div id="properties">
+                    <h2><ins>Properties:</ins></h2>
+                    <p id="pw">Width: -</p>
+                    <p id="ph">Height: -</p>
+                    <p id="np">Number of Paths: -</p>
+                    <p id="pl">Selected Path Length: -</p>
+                </div>
+            </div>
+            <div id="normal-right">
                 <div id="tools">
                     <h2><ins>Tools:</ins></h2>
                     <label for="svgLoad">SVG's code:</label>
@@ -46,22 +55,15 @@
                     <button id="orgSize">Original Size</button>
                     <button id="revSize">Revert Size</button>
 
-                    <label class="hidden" for="setW">Set Width:</label>
-                    <input id="setW" type="text">
-                    <button id="setWButton">Set Width</button>
-
-                    <label class="hidden" for="setH">Set Height:</label>
-                    <input id="setH" type="text">
-                    <button id="setHButton">Set Height</button>
-                </div>
-            </div>
-            <div class="clr" id="bottom">
-                <div id="properties">
-                    <h2><ins>Properties:</ins></h2>
-                    <p id="pw">Width: -</p>
-                    <p id="ph">Height: -</p>
-                    <p id="np">Number of Paths: -</p>
-                    <p id="pl">Selected Path Length: -</p>
+                    <p>Set Dimensions:</p>
+                    <div>
+                        <input id="setW" type="text">
+                        <button id="setWButton">Set Width</button>
+                    </div>
+                    <div>
+                        <input id="setH" type="text">
+                        <button id="setHButton">Set Height</button>
+                    </div>
                 </div>
 
                 <div id="options">
@@ -77,14 +79,18 @@
                     <input id="nPoints" type="text">
                     <button id="submitButton">Submit</button>
 
-                    <button id="createTextButton">Download Coordinate List</button>
-                    <button id="LIPButton">Download a Lagrange Curve Equation</button>
+                    <button id="createTextButton">Coordinate List</button>
+                    <button id="LIPButton">Lagrange Curve Equation</button>
+                    <button id="bézierPFPath">Parametric Form</button>
+                    <button id="bézierIFPath">Implicit Form</button>
+                    <button id="allParamPath">Get Parametric Form of All Paths</button>
                 </div>
             </div>
         </div>
         <div class="clr" id="advanced">
-            <div id="left">
+            <div id="advanced-left">
                 <h2><ins>Pick Custom Points:</ins></h2>
+
                 <button id="loadPathButton">Load Path</button>
                 <button id="transformButton">Transform</button>
                 <button id="showPointsButton">Show Points</button>
@@ -99,7 +105,7 @@
                 <textarea id="output_field" type="text" readonly></textarea>
                 <button id="clearButton">Clear Output</button>
             </div>
-            <div id="right">
+            <div id="advanced-right">
                 <h2><ins>Cubic Parametric Equation:</ins></h2>
                 <p>X = a*t^3 + b*t^2 + c*t + d</p>
                 <p>Y = p*t^3 + q*t^2 + r*t + s</p>
@@ -134,34 +140,18 @@
 
                 <h2><ins>Cubic Bézier Curve:</ins></h2>
                 <div style="margin-top: -10px;">
-                    <!-- <label class="lValText2" for="xP0">X0 =</label>
-                    <input class="coeffVal" id="xP0" type="text">
-                    <label class="rValText2" for="yP0">Y0 =</label>
-                    <input class="coeffVal" id="yP0" type="text"> -->
                     <label class="lValText2" for="P0">P0 :</label>
                     <input style="display: inline-block;" id="P0" type="text">
                 </div>
                 <div>
-                    <!-- <label class="lValText2" for="xP1">X1 =</label>
-                    <input class="coeffVal" id="xP1" type="text">
-                    <label class="rValText2" for="yP1">Y1 =</label>
-                    <input class="coeffVal" id="yP1" type="text"> -->
                     <label class="lValText2" for="P1">P1 :</label>
                     <input style="display: inline-block;" id="P1" type="text">
                 </div>
                 <div>
-                    <!-- <label class="lValText2" for="xP2">X2 =</label>
-                    <input class="coeffVal" id="xP2" type="text">
-                    <label class="rValText2" for="yP2">Y2 =</label>
-                    <input class="coeffVal" id="yP2" type="text"> -->
                     <label class="lValText2" for="P2">P2 :</label>
                     <input style="display: inline-block;" id="P2" type="text">
                 </div>
                 <div style="margin-bottom: 10px;">
-                    <!-- <label class="lValText2" for="xP3">X3 =</label>
-                    <input class="coeffVal" id="xP3" type="text">
-                    <label class="rValText2" for="yP3">Y3 =</label>
-                    <input class="coeffVal" id="yP3" type="text"> -->
                     <label class="lValText2" for="P3">P3 :</label>
                     <input style="display: inline-block;" id="P3" type="text">
                 </div>

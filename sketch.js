@@ -43,3 +43,8 @@ function output(text) {
 function clearOutput() {
 	outputBox.textContent = "";
 }
+
+function repStr(str) {
+	let newStr = str.split("+ -").join("- ");
+	return newStr
+}

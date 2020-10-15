@@ -56,35 +56,17 @@ function getCi(i) {
 
 // ============================================================================
 
-function setupCubic() {
-  select("#cubicIF").mousePressed(cubicIF);
-  select("#interPt").mousePressed(interPt);
-  select("#bézierPF").mousePressed(bézierPF);
-  select("#bézierIF").mousePressed(bézierIF);
-}
-
 function interPt() {
-  nerdamer.setVar("a", select("#aVal").value());
-  nerdamer.setVar("b", select("#bVal").value());
-  nerdamer.setVar("c", select("#cVal").value());
-  nerdamer.setVar("d", select("#dVal").value());
-
-  nerdamer.setVar("p", select("#pVal").value());
-  nerdamer.setVar("q", select("#qVal").value());
-  nerdamer.setVar("r", select("#rVal").value());
-  nerdamer.setVar("s", select("#sVal").value());
+  setNerdVal();
 
   let uVal = nerdamer("(b*r - c*q)/(a*q - b*p)").toString();
   let vVal = nerdamer("(a*r - p*c)/(b*p - a*q)").toString();
 
   nerdamer.setVar("u", uVal);
   nerdamer.setVar("v", vVal);
-  //console.log(uVal, vVal);
-  
+
   sol = nerdamer.solve("x^2 + v*x + (v^2 - u)", "x").text("decimals");
   tSolArr = sol.replace("[", "").replace("]", "").split(",");
-  //console.log(sol);
-  console.log(tSolArr);
 
   nerdamer.setVar("t", tSolArr[0]);
 
@@ -95,102 +77,21 @@ function interPt() {
   console.log(`x: ${xVal}, y: ${yVal}`);
 }
 
-// For Cubic Parametric Equation.
-function cubicIF() {
-  nerdamer.setVar("a", select("#aVal").value());
-  nerdamer.setVar("b", select("#bVal").value());
-  nerdamer.setVar("c", select("#cVal").value());
-  nerdamer.setVar("d", select("#dVal").value());
-
-  nerdamer.setVar("p", select("#pVal").value());
-  nerdamer.setVar("q", select("#qVal").value());
-  nerdamer.setVar("r", select("#rVal").value());
-  nerdamer.setVar("s", select("#sVal").value());
-
-  implicitForm();
-}
-
-// Gets the Parametric Coefficients.
-function getCoeff() {
-  P0 = select("#P0").value().split(",");
-  P1 = select("#P1").value().split(",");
-  P2 = select("#P2").value().split(",");
-  P3 = select("#P3").value().split(",");
-
-  // x0 = float(select("#xP0").value());
-  // x1 = float(select("#xP1").value());
-  // x2 = float(select("#xP2").value());
-  // x3 = float(select("#xP3").value());
-  // y0 = 11.356 - float(select("#yP0").value());
-  // y1 = 11.356 - float(select("#yP1").value());
-  // y2 = 11.356 - float(select("#yP2").value());
-  // y3 = 11.356 - float(select("#yP3").value());
-
-  x0 = float(round(P0[0], 4));
-  x1 = float(round(P1[0], 4));
-  x2 = float(round(P2[0], 4));
-  x3 = float(round(P3[0], 4));
-  y0 = 11.356 - float(round(P0[1], 4));
-  y1 = 11.356 - float(round(P1[1], 4));
-  y2 = 11.356 - float(round(P2[1], 4));
-  y3 = 11.356 - float(round(P3[1], 4));
-
-  aCoeff = round(-1 * x0 + 3 * x1 - 3 * x2 + x3, 4);
-  bCoeff = round(3 * x0 - 6 * x1 + 3 * x2, 4);
-  cCoeff = round(-3 * x0 + 3 * x1, 4);
-  dCoeff = round(x0, 4);
-  pCoeff = round(-1 * y0 + 3 * y1 - 3 * y2 + y3, 4);
-  qCoeff = round(3 * y0 - 6 * y1 + 3 * y2, 4);
-  rCoeff = round(-3 * y0 + 3 * y1, 4);
-  sCoeff = round(y0, 4);
-}
-
-// For Cubic Bézier Parametric.
-function bézierPF() {
-  getCoeff();
-
-  let paramArr = [
-    `a: ${aCoeff}, b: ${bCoeff}, c: ${cCoeff}, d: ${dCoeff}`,
-    `p: ${pCoeff}, q: ${qCoeff}, r: ${rCoeff}, s: ${sCoeff}`,
-    ``,
-    `X = ${aCoeff}*t^3 + ${bCoeff}*t^2 + ${cCoeff}*t + ${dCoeff}`,
-    `Y = ${pCoeff}*t^3 + ${qCoeff}*t^2 + ${rCoeff}*t + ${sCoeff}`
-  ];
-  saveStrings(paramArr, "Parametric Curve.txt");
-}
-
-// For Cubic Bézier Curve.
-function bézierIF() {
-  getCoeff();
-
-  nerdamer.setVar("a", aCoeff.toString());
-  nerdamer.setVar("b", bCoeff.toString());
-  nerdamer.setVar("c", cCoeff.toString());
-  nerdamer.setVar("d", dCoeff.toString());
-
-  nerdamer.setVar("p", pCoeff.toString());
-  nerdamer.setVar("q", qCoeff.toString());
-  nerdamer.setVar("r", rCoeff.toString());
-  nerdamer.setVar("s", sCoeff.toString());
-
-  implicitForm();
-}
-
 // Calculates Implicit Form
 function implicitForm() {
   // Nerdamer Method.
-  let matrix =
-    `  [a, b, c, d-x, 0, 0]` +
-    `, [0, a, b, c, d-x, 0]` +
-    `, [0, 0, a, b, c, d-x]` +
-    `, [p, q, r, s-y, 0, 0]` +
-    `, [0, p, q, r, s-y, 0]` +
-    `, [0, 0, p, q, r, s-y]`;
-  nerdamer.setVar("M", `matrix(${matrix})`);
-  let resultant = nerdamer("determinant(M)");
-  let resStr = resultant.toString() + " = 0";
-  let resDec = resultant.text("decimals") + " = 0";
-  let resTex = resultant.toTeX() + " = 0";
+  // let matrix =
+  //   `  [a, b, c, d-x, 0, 0]` +
+  //   `, [0, a, b, c, d-x, 0]` +
+  //   `, [0, 0, a, b, c, d-x]` +
+  //   `, [p, q, r, s-y, 0, 0]` +
+  //   `, [0, p, q, r, s-y, 0]` +
+  //   `, [0, 0, p, q, r, s-y]`;
+  // nerdamer.setVar("M", `matrix(${matrix})`);
+  // let resultant = nerdamer("determinant(M)");
+  // let resStr = resultant.toString() + " = 0";
+  // let resDec = resultant.text("decimals") + " = 0";
+  // let resTex = resultant.toTeX() + " = 0";
 
   // Calculation of variables.
   let AVal = nerdamer("a*p^2").toString();
@@ -208,9 +109,7 @@ function implicitForm() {
   let MVal = nerdamer("a^2 *p*s^2 -2*a^2 *q*r*s +a^2 *r^3 +a*b*p*r*s +a*b*q^2 *s -a*b*q*r^2 -2*a*c*p*r^2 +a*c*q^2 *r -2*a*d*p^2 *s +3*a*d*p*q*r -a*d*q^3 -b^2 *p*q*s +b^2 *p*r^2 +b*c*p^2 *s -b*c*p*q*r -2*b*d*p^2 *r +b*d*p*q^2 +c^2 *p^2 *r -c*d*p^2 *q +d^2 *p^3").toString();
 
   // Wolfram Alpha Method.
-  let wolfEq =
-    nerdamer(`(s-y)*(${AVal}*x^2 + ${BVal}*xy + ${CVal}*y^2 + ${DVal}*x + ${EVal}*y + ${FVal}) - (d-x)*(${HVal}*x^2 + ${IVal}*xy + ${JVal}*y^2 + ${KVal}*x + ${LVal}*y + ${MVal})`).toString() + " = 0";
-  //console.log(wolfEq);
+  //let wolfEq = nerdamer(`(s-y)*(${AVal}*x^2 + ${BVal}*xy + ${CVal}*y^2 + ${DVal}*x + ${EVal}*y + ${FVal}) - (d-x)*(${HVal}*x^2 + ${IVal}*xy + ${JVal}*y^2 + ${KVal}*x + ${LVal}*y + ${MVal})`).toString() + " = 0";
 
   // Salman's Method.
   coeff1 = nerdamer(`${HVal}`).text("decimals");
@@ -225,14 +124,13 @@ function implicitForm() {
   coeff10 = nerdamer(`-1 * d * ${MVal} + s * ${FVal}`).text("decimals");
 
   simpleEq = `${coeff1}*x^3 + ${coeff2}*x^2 *y + ${coeff3}*x*y^2 + ${coeff4}*y^3 + ${coeff5}*x^2 + ${coeff6}*xy + ${coeff7}*y^2 + ${coeff8}*x + ${coeff9}*y + ${coeff10} = 0`;
-  //console.log(simpleEq);
 
-  tempArr = [coeff1,coeff2,coeff3,coeff4,coeff5,coeff6,coeff7,coeff8,coeff9,coeff10];
+  tempArr = [coeff1, coeff2, coeff3, coeff4, coeff5, coeff6, coeff7, coeff8, coeff9, coeff10];
   tempCoeffList = [];
   for (let i = 0; i < tempArr.length; i++) {
     tempCoeffList.push(abs(float(tempArr[i])));
   }
-  sizeArr = tempCoeffList.slice().sort(function(a, b) {
+  sizeArr = tempCoeffList.slice().sort(function (a, b) {
     return a - b;
   });
   smallest = sizeArr[0];
@@ -245,46 +143,48 @@ function implicitForm() {
   }
   for (let j = 0; j < tempArr.length; j++) {
     let num = float(tempArr[j]);
-    let coeff = num / smallest;
+    let coeff = round(num / smallest, 4);
     coeffList.push(coeff);
   }
-  //console.log(coeffList);
   simplestEq = `${coeffList[0]}*x^3 + ${coeffList[1]}*x^2 *y + ${coeffList[2]}*x*y^2 + ${coeffList[3]}*y^3 + ${coeffList[4]}*x^2 + ${coeffList[5]}*xy + ${coeffList[6]}*y^2 + ${coeffList[7]}*x + ${coeffList[8]}*y + ${coeffList[9]} = 0`;
-  //console.log(simplestEq);
   bestEq = `${coeffList[10]}*x^3 + ${coeffList[11]}*x^2 *y + ${coeffList[12]}*x*y^2 + ${coeffList[13]}*y^3 + ${coeffList[14]}*x^2 + ${coeffList[15]}*xy + ${coeffList[16]}*y^2 + ${coeffList[17]}*x + ${coeffList[18]}*y + ${coeffList[19]} = 0`;
 
   //let salArr = ["Salman's Method:", "================", simpleEq];
   //let wolfArr = ["Wolfram Alpha Method:", "=====================", wolfEq];
   //let nerdArr = ["Nerdamer Method:", "================", "", "Original:", resStr, "", "Decimal:", resDec, "", "LaTeX:", resTex];
 
-  let saveArr = [
-    "Salman's Method:",
-    "================",
-    simpleEq,
-    "",
-    simplestEq,
-    "",
-    bestEq,
-    "",
-    "Wolfram Alpha Method:",
-    "=====================",
-    wolfEq,
-    "",
-    "Nerdamer Method:",
-    "================",
-    "",
-    "Original:",
-    resStr,
-    "",
-    "Decimal:",
-    resDec,
-    "",
-    "LaTeX:",
-    resTex
-  ];
+  // let saveArr = [
+  //   "Salman's Method:",
+  //   "================",
+  //   simpleEq,
+  //   "",
+  //   simplestEq,
+  //   "",
+  //   bestEq,
+  //   "",
+  //   "Wolfram Alpha Method:",
+  //   "=====================",
+  //   wolfEq,
+  //   "",
+  //   "Nerdamer Method:",
+  //   "================",
+  //   "",
+  //   "Original:",
+  //   resStr,
+  //   "",
+  //   "Decimal:",
+  //   resDec,
+  //   "",
+  //   "LaTeX:",
+  //   resTex
+  // ];
+
+  simpleEq = repStr(simpleEq);
+  simplestEq = repStr(simplestEq);
+  bestEq = repStr(bestEq);
+
+  let saveArr = ["Implicit Form:", "==============", simpleEq, "", simplestEq, "", bestEq];
   saveStrings(saveArr, "Implicit Curve.txt");
 }
 
 // ============================================================================
-
-
