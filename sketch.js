@@ -3,7 +3,7 @@ function setup() {
 	setupTools();
 	setupOptions();
 	setupButtons();
-	setupCubic();
+	setupBézier();
 }
 
 function draw() {
@@ -47,4 +47,14 @@ function clearOutput() {
 function repStr(str) {
 	let newStr = str.split("+ -").join("- ");
 	return newStr
+}
+
+function unRepStr(str) {
+	let newStr = str.split("- ").join("+ -");
+	return newStr
+}
+
+function popElt(arr, elt) {
+	let i = arr.indexOf(elt);
+	return arr.slice(0, i).concat(arr.slice(i + 1));
 }

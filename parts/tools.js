@@ -76,20 +76,16 @@ function loadSVG() {
   }
 }
 
+// Gets All Paths in SVG.
 function getAllPaths() {
   let pathList = [];
-  let svg = document.querySelector("svg[id='svg']");
-  let pathNodes = svg.querySelectorAll("path");
-  pathNodes.forEach(Node => {
-    let name = Node.getAttribute("id");
-    let data = Node.getAttribute("d");
-    let obj = {
-      name: name,
-      data: data
-    };
-    pathList.push(obj);
+  let pathNodes = $("svg[id='svg']").find("path");
+  $.each(pathNodes, (key, Node) => {
+    pathList.push({
+      name: Node.getAttribute("id"),
+      data: Node.getAttribute("d")
+    });
   });
-  //console.log(pathList);
   return pathList;
 }
 

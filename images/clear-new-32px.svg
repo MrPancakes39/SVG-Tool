@@ -1,0 +1,13 @@
+<svg id="clearDraw" width="32" height="32" viewBox="0 0 32 32">
+<rect width="32" height="32" x="0" y="0"
+ id="rect859"
+ style="opacity:1;fill:#4caf50;fill-opacity:1;stroke:none;stroke-width:11.33887959;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+<path
+ id="path835"
+ d="M 4.9445755,5.0403075 27.055425,26.959692"
+ style="opacity:1;fill:none;fill-opacity:0.99816141;stroke:#ffffff;stroke-width:3.95465302;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+<path
+ id="path835-6"
+ d="M 27.055425,5.0403076 4.9445755,26.959692"
+ style="opacity:1;fill:none;fill-opacity:0.99816141;stroke:#ffffff;stroke-width:3.95465302;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+</svg>

@@ -57,42 +57,30 @@ function getCi(i) {
 // ============================================================================
 
 function interPt() {
-  setNerdVal();
-
   let uVal = nerdamer("(b*r - c*q)/(a*q - b*p)").toString();
   let vVal = nerdamer("(a*r - p*c)/(b*p - a*q)").toString();
 
   nerdamer.setVar("u", uVal);
   nerdamer.setVar("v", vVal);
 
-  sol = nerdamer.solve("x^2 + v*x + (v^2 - u)", "x").text("decimals");
+  sol = nerdamer.solve("x^2 - v*x + (v^2 - u)", "x").text("decimals");
   tSolArr = sol.replace("[", "").replace("]", "").split(",");
 
-  nerdamer.setVar("t", tSolArr[0]);
+  if (!(tSolArr[0].includes("i"))) {
+    nerdamer.setVar("t", tSolArr[0]);
+    let xVal = round(nerdamer("a*t^3 + b*t^2 + c*t + d").text("decimals"), 4);
+    let yVal = round(nerdamer("p*t^3 + q*t^2 + r*t + s").text("decimals"), 4);
 
-  let xVal = round(nerdamer("a*t^3 + b*t^2 + c*t + d").text("decimals"), 4);
-  let yVal = round(nerdamer("p*t^3 + q*t^2 + r*t + s").text("decimals"), 4);
-
-  output(`x: ${xVal}, y: ${yVal}`);
-  console.log(`x: ${xVal}, y: ${yVal}`);
+    output(`(${xVal},${yVal})`);
+    console.log(`(${xVal},${yVal})`);
+  } else {
+    output(`There exist no Intersection`);
+    console.log(`There exist no Intersection`);
+  }
 }
 
 // Calculates Implicit Form
 function implicitForm() {
-  // Nerdamer Method.
-  // let matrix =
-  //   `  [a, b, c, d-x, 0, 0]` +
-  //   `, [0, a, b, c, d-x, 0]` +
-  //   `, [0, 0, a, b, c, d-x]` +
-  //   `, [p, q, r, s-y, 0, 0]` +
-  //   `, [0, p, q, r, s-y, 0]` +
-  //   `, [0, 0, p, q, r, s-y]`;
-  // nerdamer.setVar("M", `matrix(${matrix})`);
-  // let resultant = nerdamer("determinant(M)");
-  // let resStr = resultant.toString() + " = 0";
-  // let resDec = resultant.text("decimals") + " = 0";
-  // let resTex = resultant.toTeX() + " = 0";
-
   // Calculation of variables.
   let AVal = nerdamer("a*p^2").toString();
   let BVal = nerdamer("-2*a^2 *p").toString();
@@ -108,9 +96,6 @@ function implicitForm() {
   let LVal = nerdamer("-2*a^2 *p*s +2*a^2 *q*r -a*b*p*r -a*b*q^2 +2*a*d*p^2 +b^2 *p*q -b*c*p^2").toString();
   let MVal = nerdamer("a^2 *p*s^2 -2*a^2 *q*r*s +a^2 *r^3 +a*b*p*r*s +a*b*q^2 *s -a*b*q*r^2 -2*a*c*p*r^2 +a*c*q^2 *r -2*a*d*p^2 *s +3*a*d*p*q*r -a*d*q^3 -b^2 *p*q*s +b^2 *p*r^2 +b*c*p^2 *s -b*c*p*q*r -2*b*d*p^2 *r +b*d*p*q^2 +c^2 *p^2 *r -c*d*p^2 *q +d^2 *p^3").toString();
 
-  // Wolfram Alpha Method.
-  //let wolfEq = nerdamer(`(s-y)*(${AVal}*x^2 + ${BVal}*xy + ${CVal}*y^2 + ${DVal}*x + ${EVal}*y + ${FVal}) - (d-x)*(${HVal}*x^2 + ${IVal}*xy + ${JVal}*y^2 + ${KVal}*x + ${LVal}*y + ${MVal})`).toString() + " = 0";
-
   // Salman's Method.
   coeff1 = nerdamer(`${HVal}`).text("decimals");
   coeff2 = nerdamer(`${IVal} - ${AVal}`).text("decimals");
@@ -123,68 +108,17 @@ function implicitForm() {
   coeff9 = nerdamer(`-1 * d * ${LVal} - ${FVal} + s * ${EVal}`).text("decimals");
   coeff10 = nerdamer(`-1 * d * ${MVal} + s * ${FVal}`).text("decimals");
 
-  simpleEq = `${coeff1}*x^3 + ${coeff2}*x^2 *y + ${coeff3}*x*y^2 + ${coeff4}*y^3 + ${coeff5}*x^2 + ${coeff6}*xy + ${coeff7}*y^2 + ${coeff8}*x + ${coeff9}*y + ${coeff10} = 0`;
+  coeffList = [coeff1, coeff2, coeff3, coeff4, coeff5, coeff6, coeff7, coeff8, coeff9, coeff10];
+  let smallestCoeff = min(Array.from(coeffList, coeff => abs(float(coeff))));
+  coeffList = Array.from(coeffList, coeff => round(float(coeff) / smallestCoeff, 5));
 
-  tempArr = [coeff1, coeff2, coeff3, coeff4, coeff5, coeff6, coeff7, coeff8, coeff9, coeff10];
-  tempCoeffList = [];
-  for (let i = 0; i < tempArr.length; i++) {
-    tempCoeffList.push(abs(float(tempArr[i])));
-  }
-  sizeArr = tempCoeffList.slice().sort(function (a, b) {
-    return a - b;
-  });
-  smallest = sizeArr[0];
-  biggest = sizeArr[sizeArr.length - 1];
-  coeffList = [];
-  for (let i = 0; i < tempArr.length; i++) {
-    let num = float(tempArr[i]);
-    let coeff = num / biggest;
-    coeffList.push(coeff);
-  }
-  for (let j = 0; j < tempArr.length; j++) {
-    let num = float(tempArr[j]);
-    let coeff = round(num / smallest, 4);
-    coeffList.push(coeff);
-  }
-  simplestEq = `${coeffList[0]}*x^3 + ${coeffList[1]}*x^2 *y + ${coeffList[2]}*x*y^2 + ${coeffList[3]}*y^3 + ${coeffList[4]}*x^2 + ${coeffList[5]}*xy + ${coeffList[6]}*y^2 + ${coeffList[7]}*x + ${coeffList[8]}*y + ${coeffList[9]} = 0`;
-  bestEq = `${coeffList[10]}*x^3 + ${coeffList[11]}*x^2 *y + ${coeffList[12]}*x*y^2 + ${coeffList[13]}*y^3 + ${coeffList[14]}*x^2 + ${coeffList[15]}*xy + ${coeffList[16]}*y^2 + ${coeffList[17]}*x + ${coeffList[18]}*y + ${coeffList[19]} = 0`;
-
-  //let salArr = ["Salman's Method:", "================", simpleEq];
-  //let wolfArr = ["Wolfram Alpha Method:", "=====================", wolfEq];
-  //let nerdArr = ["Nerdamer Method:", "================", "", "Original:", resStr, "", "Decimal:", resDec, "", "LaTeX:", resTex];
-
-  // let saveArr = [
-  //   "Salman's Method:",
-  //   "================",
-  //   simpleEq,
-  //   "",
-  //   simplestEq,
-  //   "",
-  //   bestEq,
-  //   "",
-  //   "Wolfram Alpha Method:",
-  //   "=====================",
-  //   wolfEq,
-  //   "",
-  //   "Nerdamer Method:",
-  //   "================",
-  //   "",
-  //   "Original:",
-  //   resStr,
-  //   "",
-  //   "Decimal:",
-  //   resDec,
-  //   "",
-  //   "LaTeX:",
-  //   resTex
-  // ];
-
-  simpleEq = repStr(simpleEq);
-  simplestEq = repStr(simplestEq);
+  bestEq = `${coeffList[0]}*x^3 + ${coeffList[1]}*x^2 *y + ${coeffList[2]}*x*y^2 + ${coeffList[3]}*y^3 + ${coeffList[4]}*x^2 + ${coeffList[5]}*xy + ${coeffList[6]}*y^2 + ${coeffList[7]}*x + ${coeffList[8]}*y + ${coeffList[9]} = 0`;
   bestEq = repStr(bestEq);
+  //console.log(bestEq);
 
-  let saveArr = ["Implicit Form:", "==============", simpleEq, "", simplestEq, "", bestEq];
-  saveStrings(saveArr, "Implicit Curve.txt");
+  return bestEq;
+  //let saveArr = ["Implicit Form:", "==============", bestEq];
+  //saveStrings(saveArr, "Implicit Curve.txt");
 }
 
 // ============================================================================

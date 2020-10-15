@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>SVG Tool 5.0</title>
+    <title>SVG Tool 6.0</title>
     <link rel="stylesheet" href="main.css">
     <link rel="icon" href="images/simplified_icon.ico">
 
@@ -96,6 +96,16 @@
                 <button id="showPointsButton">Show Points</button>
                 <button id="submitCustomButton">Submit Selected Points</button>
 
+                <svg id="clearDraw" width="33.75" height="33.75" viewBox="0 0 32 32">
+                    <rect width="32" height="32" x="0" y="0" id="rect859"
+                        style="opacity:1;fill:#4caf50;fill-opacity:1;stroke:none;stroke-width:11.33887959;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+                    <path id="path835" d="M 4.9445755,5.0403075 27.055425,26.959692"
+                        style="opacity:1;fill:none;fill-opacity:0.99816141;stroke:#ffffff;stroke-width:3.95465302;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+                    <path id="path835-6" d="M 27.055425,5.0403076 4.9445755,26.959692"
+                        style="opacity:1;fill:none;fill-opacity:0.99816141;stroke:#ffffff;stroke-width:3.95465302;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+                </svg>
+
+
                 <h3 id="customInput"><ins>Custom Input:</ins></h3>
                 <label id="selPLabel_alt" for="selPath_alt">Select a Path:</label>
                 <input id="selPath_alt" type="text">
@@ -107,56 +117,43 @@
             </div>
             <div id="advanced-right">
                 <h2><ins>Cubic Parametric Equation:</ins></h2>
-                <p>X = a*t^3 + b*t^2 + c*t + d</p>
-                <p>Y = p*t^3 + q*t^2 + r*t + s</p>
-                <hr>
-                <div>
-                    <label class="lValText" for="aVal">a =</label>
-                    <input class="coeffVal" id="aVal" type="text">
-                    <label class="rValText" for="pVal">p =</label>
-                    <input class="coeffVal" id="pVal" type="text">
-                </div>
-                <div>
-                    <label class="lValText" for="bVal">b =</label>
-                    <input class="coeffVal" id="bVal" type="text">
-                    <label class="rValText" for="qVal">q =</label>
-                    <input class="coeffVal" id="qVal" type="text">
-                </div>
-                <div>
-                    <label class="lValText" for="cVal">c =</label>
-                    <input class="coeffVal" id="cVal" type="text">
-                    <label class="rValText" for="rVal">r =</label>
-                    <input class="coeffVal" id="rVal" type="text">
-                </div>
                 <div style="margin-bottom: 10px;">
-                    <label class="lValText" for="dVal">d =</label>
-                    <input class="coeffVal" id="dVal" type="text">
-                    <label class="rValText" for="sVal">s =</label>
-                    <input class="coeffVal" id="sVal" type="text">
+                    <label for="paramEq">Parametric Equation:</label>
+                    <input class="inlineB" id="paramEq" type="text">
+                    <button class="inlineB" id="paramSend">Send</button>
                 </div>
+
                 <hr>
+                <p class="eq" id="xEqP">X = a*t^3 + b*t^2 + c*t + d</p>
+                <p class="eq" id="yEqP">Y = p*t^3 + q*t^2 + r*t + s</p>
+                <hr>
+
                 <button id="cubicIF">Implicit Form</button>
                 <button id="interPt">Intersection Pt</button>
 
                 <h2><ins>Cubic Bézier Curve:</ins></h2>
                 <div style="margin-top: -10px;">
                     <label class="lValText2" for="P0">P0 :</label>
-                    <input style="display: inline-block;" id="P0" type="text">
+                    <input class="inlineB" id="P0" type="text">
                 </div>
                 <div>
                     <label class="lValText2" for="P1">P1 :</label>
-                    <input style="display: inline-block;" id="P1" type="text">
+                    <input class="inlineB" id="P1" type="text">
                 </div>
                 <div>
                     <label class="lValText2" for="P2">P2 :</label>
-                    <input style="display: inline-block;" id="P2" type="text">
+                    <input class="inlineB" id="P2" type="text">
                 </div>
                 <div style="margin-bottom: 10px;">
                     <label class="lValText2" for="P3">P3 :</label>
-                    <input style="display: inline-block;" id="P3" type="text">
+                    <input class="inlineB" id="P3" type="text">
                 </div>
                 <button id="bézierPF">Parametric Form</button>
                 <button id="bézierIF">Implicit Form</button>
+
+                <label for="paramEq1">Parametric Equation:</label>
+                <input class="inlineB" id="paramEq1" type="text">
+                <button class="inlineB" id="paramSend1">Send</button>
             </div>
         </div>
 </body>

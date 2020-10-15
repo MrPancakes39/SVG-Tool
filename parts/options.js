@@ -46,28 +46,6 @@ function selectedPath() {
 }
 
 // Gets the selected path from the custom input textbox.
-// function selectedPath_alt() {
-//     // If the number entered has a "," remove it.
-//     if (selPath_alt.value().includes(",")) {
-//         tempArr = selPath_alt.value().split(",");
-//         selPathValue_alt = tempArr.join("");
-//     } else {
-//         selPathValue_alt = selPath_alt.value();
-//     }
-
-//     if (0 < selPathValue_alt && selPathValue_alt < (nPaths + 1)) {
-//         let pathName = "Path_" + selPathValue_alt;
-//         path = document.getElementById(pathName);
-//         lenPath = path.getTotalLength();
-//         propObj.plProp = lenPath;
-//         updateProperties();
-//         drawCanvas = false;
-//         getPoints();
-//     } else {
-//         output("Not a valid path value!!");
-//     }
-// }
-
 function selectedPath_alt() {
     // If the number entered has a "," remove it.
     if (selPath_alt.value().includes(",")) {

@@ -171,9 +171,20 @@ select {
   border-style: none;
   margin: 10px 0px 12px;
   padding: 8px 16px;
+  display: inline-block;
 }
 
 #submitCustomButton:hover {
+  box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2), 0 6px 16px 0 rgba(0, 0, 0, 0.19);
+}
+
+#clearDraw {
+  position: fixed;
+  display: inline-block;
+  margin: 10px 0px 12px 8px;
+}
+
+#clearDraw:hover {
   box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2), 0 6px 16px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -242,6 +253,15 @@ input[type="text"].coeffVal {
   display: Inline;
   margin-left: 15px;
 } */
+
+.inlineB,
+input[type="text"].inlineB {
+  display: inline-block;
+}
+
+.eq {
+  font-size: 12px;
+}
 
 #cubicIF,
 #interPt,

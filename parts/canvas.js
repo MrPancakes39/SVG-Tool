@@ -25,6 +25,11 @@ function setupButtons() {
     select("#transformButton").mousePressed(transformPath);
     select("#showPointsButton").mousePressed(displayPoints);
     select("#submitCustomButton").mousePressed(submitPoints);
+    select("#clearDraw").mousePressed(() => {
+        drawCanvas = false;
+        Transformed = false;
+        showPoints = false;
+    });
 }
 
 // Gets points from path and put them in arrays.
@@ -143,9 +148,7 @@ function submitPoints() {
 
             xValues = [];
             yValues = [];
-        }
-
-        if (xValues.length == 0) {
+        } else if (xValues.length == 0) {
             output("There are 0 points selected.");
         }
     } else {
