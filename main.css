@@ -1,0 +1,34 @@
+.Path {
+    fill: none;
+    stroke: #707070;
+    stroke-width: 10;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+#main {
+    width: 500px;
+    height: 600px;
+}
+
+#top {
+    width: 500px;
+    height: 400px;
+}
+
+#bottom {
+    width: 500px;
+    height: 200px;
+}
+
+#view,
+#properties {
+    width: 240px;
+    float: left;
+}
+
+#tools,
+#options {
+    width: 173px;
+    float: right;
+}
