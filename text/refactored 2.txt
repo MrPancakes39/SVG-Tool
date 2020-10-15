@@ -1,0 +1,16 @@
+while (i < ((yValues.length) - 1)) {
+            equation += "{" + noms[i] + "} / {" + String(dens[i]) + "}" + " + ";
+            i++;
+        }
+
+        if (i == ((yValues.length) - 1)) {
+            equation += "{" + noms[i] + "} / {" + String(dens[i]) + "}";
+        }
+		
+for (let i = 0; i < yValues.length; i++) {
+	if (i < yValues.length - 1) {
+		equation += "{" + noms[i] + "} / {" + String(dens[i]) + "}" + " + ";
+	} else {
+		equation += "{" + noms[i] + "} / {" + String(dens[i]) + "}";
+	}
+}

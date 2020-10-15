@@ -1,0 +1,33 @@
+while (j < (xValues.length)) {
+
+            if (k == (xValues.length)) {
+                k = 0;
+                j++;
+                dens.push(den);
+                den = 1;
+                noms.push(nom + yValues[j - 1]);
+                nom = "";
+            }
+
+            if (j == k) {
+                k++;
+            } else {
+                den *= (float(xValues[j]) - float(xValues[k]));
+                nom += ("(x - " + xValues[k] + ") * ");
+                k++;
+            }
+
+for (let j = 0; j < (xValues.length); j++) {
+	for (let k = 0; k < (xValues.length); k++) {
+		if(j == k) {
+			console.log("hi");
+		} else {
+			den *= (float(xValues[j]) - float(xValues[k]));
+			nom += ("(x - " + xValues[k] + ") * ");
+		}
+	}
+	dens.push(den);
+    den = 1;
+	noms.push(nom + yValues[j]);
+	nom = "";
+}

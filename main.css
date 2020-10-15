@@ -1,3 +1,24 @@
+.hidden {
+    display: none;
+}
+
+.clr {
+    clear: both;
+}
+
+/* Styling for headings */
+h2 {
+    font-family: Garamond, Arial, Times, Georgia, Helvetica, sans-serif;
+    font-size: 1.7em;
+}
+
+h3 {
+    font-family: Garamond, Arial, Times, Georgia, Helvetica, sans-serif;
+    font-size: 1.4em;
+}
+
+/* Styling for view div */
+
 .Path {
     fill: none;
     stroke: #707070;
@@ -6,29 +27,112 @@
     stroke-linejoin: round;
 }
 
+/* Styling for Tools */
+
+label {
+    margin-top: 10px;
+    display: block;
+    font-weight: 600;
+    color: #9644AA;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+button {
+    margin-top: 10px;
+    display: block;
+    color: #FFF;
+    background-color: #3633F0;
+    border-color: #3633F0;
+    text-align: center;
+    font-size: 12px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    letter-spacing: .1em;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+button:hover,
+button:focus {
+    color: #FFF;
+    background-color: #302DD8;
+    border-color: #302DD8;
+}
+
+#orgSize,
+#revSize {
+    margin: 0px;
+    display: inline;
+}
+
+input[type="text"] {
+    margin-top: 10px;
+    display: block;
+    padding: 6px 0px;
+    background-color: #fff;
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
+    box-shadow: none;
+    box-sizing: border-box;
+}
+
+/* Styling for Properties */
+
+p {
+    font-weight: 600;
+    color: #9644AA;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+/* Styling for Options*/
+
+#selPLabel,
+#nPLabel,
+#sendButton,
+#submitButton {
+    display: Inline;
+}
+
+#sendButton,
+#submitButton {
+    margin-left: 2px;
+}
+
+.seperator {
+    margin: 0px 10px;
+}
+
+#selPath,
+#nPoints {
+    width: 30px;
+    display: Inline;
+    text-align: center;
+}
+
+/* Styling the divs */
+
 #main {
-    width: 500px;
-    height: 600px;
+    width: 650px;
+    height: 650px;
 }
 
 #top {
-    width: 500px;
+    width: 650px;
     height: 400px;
 }
 
 #bottom {
-    width: 500px;
-    height: 200px;
+    width: 650px;
+    height: 250px;
 }
 
 #view,
 #properties {
-    width: 240px;
+    width: 300px;
     float: left;
 }
 
 #tools,
 #options {
-    width: 173px;
+    width: 300px;
     float: right;
 }
